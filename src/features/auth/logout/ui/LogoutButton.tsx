@@ -19,5 +19,9 @@ export default function LogoutButton() {
 		router.refresh()
 	}
 
-	return <Button onClick={clickHandler}>Выйти</Button>
+	return (
+		<Button onClick={clickHandler} styledBorder>
+			Выйти
+		</Button>
+	)
 }

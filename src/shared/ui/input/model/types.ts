@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import { DetailedHTMLProps, InputHTMLAttributes, JSX } from 'react'
 
 export type Input = DetailedHTMLProps<
 	InputHTMLAttributes<HTMLInputElement>,
@@ -6,4 +6,5 @@ export type Input = DetailedHTMLProps<
 > & {
 	label?: string
 	error?: string
+	icon?: () => JSX.Element
 }

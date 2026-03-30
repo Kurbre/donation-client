@@ -11,6 +11,9 @@ import { Login, LoginData } from '../model/types'
 import { loginFetch } from '../api/login-fetch'
 import { loginSchema } from '../model/login-schema'
 import { toast } from 'react-toastify'
+import { MdOutlineMail } from 'react-icons/md'
+import { CiLock } from 'react-icons/ci'
+import Link from 'next/link'
 
 export default function LoginForm() {
 	const router = useRouter()
@@ -53,6 +56,7 @@ export default function LoginForm() {
 						placeholder='Введите email'
 						type='email'
 						error={formState.errors.email?.message}
+						icon={() => <MdOutlineMail size={21} className='text-gray-400' />}
 						{...register('email')}
 					/>
 					<Input
@@ -60,14 +64,31 @@ export default function LoginForm() {
 						placeholder='Введите пароль'
 						type='password'
 						error={formState.errors.password?.message}
+						icon={() => <CiLock size={21} className='text-gray-400' />}
 						{...register('password')}
 					/>
 				</>
 			)}
 			renderFooter={() => (
-				<Button disabled={isPending} className='w-full'>
-					Войти
-				</Button>
+				<div className='w-full mb-2'>
+					<Button disabled={isPending} className='w-full'>
+						Войти
+					</Button>
+					<div className='mt-6 flex justify-between items-center'>
+						<Link
+							href='/auth/reset-password'
+							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
+						>
+							Забыли пароль?
+						</Link>
+						<Link
+							href='/auth/register'
+							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
+						>
+							Ещё нет аккаунта? Зарегестрироваться
+						</Link>
+					</div>
+				</div>
 			)}
 		/>
 	)
