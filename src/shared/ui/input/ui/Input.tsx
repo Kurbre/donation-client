@@ -14,23 +14,16 @@ const InputComponent = forwardRef<HTMLInputElement, Input>(
 						{label}
 					</label>
 				)}
-				<div
+				<input
+					id={id}
+					type={type}
+					ref={ref}
+					{...props}
 					className={cn(
-						'p-px rounded-full w-full mt-1',
-						error ? 'bg-red-500' : 'gradient'
+						'bg-white neon-outline mt-2 dark:bg-foreground-dark rounded-full outline-none px-6 pt-3 pb-3.5 w-full text-sm focus:scale-103',
+						className
 					)}
-				>
-					<input
-						id={id}
-						type={type}
-						ref={ref}
-						{...props}
-						className={cn(
-							'bg-white dark:bg-foreground-dark rounded-full outline-none px-4 pt-2 pb-2.5 w-full text-sm',
-							className
-						)}
-					/>
-				</div>
+				/>
 				{error && <span className='text-xs text-red-500'>{error}</span>}
 			</div>
 		)

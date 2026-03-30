@@ -11,13 +11,18 @@ export default async function Header() {
 	return (
 		<header className='bg-[#1c1c1c]'>
 			<div className='container flex justify-between items-center py-3'>
-				<Link href='/' className='text-gradient w-fit text-2xl font-roboto'>
+				<Link
+					href='/'
+					className='text-neon-gradient w-fit text-2xl font-roboto'
+				>
 					Donation
 				</Link>
 				<div className='flex items-center gap-5'>
 					{!isAuth ? (
 						<Link href='/auth/login'>
-							<Button>Войти</Button>
+							<Button styledBorder>
+								<span className='text-neon-gradient'>Войти</span>
+							</Button>
 						</Link>
 					) : (
 						<LogoutButton />
