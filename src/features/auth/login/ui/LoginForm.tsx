@@ -1,0 +1,70 @@
+'use client'
+import { Button } from '@/shared/ui/button'
+import { Form } from '@/shared/ui/form'
+import { Input } from '@/shared/ui/input'
+import { SuccessIcon } from '@/shared/ui/success-icon'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { Login, LoginData } from '../model/types'
+import { loginFetch } from '../api/login-fetch'
+import { loginSchema } from '../model/login-schema'
+import { toast } from 'react-toastify'
+
+export default function LoginForm() {
+	const router = useRouter()
+
+	const { mutateAsync, isPending } = useMutation({
+		mutationFn: (data: LoginData) => loginFetch(data),
+		onSuccess: data => {
+			toast.success(`${data.name} вы успешно авторизовались`)
+			if (document.referrer && !document.referrer.includes('/auth/login')) {
+				router.back()
+			} else {
+				router.push('/')
+			}
+
+			router.refresh()
+		},
+		onError: err => toast.error(err.message)
+	})
+
+	const { handleSubmit, formState, register } = useForm<Login>({
+		resolver: zodResolver(loginSchema),
+		mode: 'onChange'
+	})
+
+	const submitHandler = async (data: Login) => mutateAsync(data)
+
+	return (
+		<Form
+			onSubmit={handleSubmit(submitHandler)}
+			footerPosition='center'
+			renderTitle={() => (
+				<h3 className='font-sans text-2xl font-semibold text-center'>
+					Авторизация
+				</h3>
+			)}
+			renderContent={() => (
+				<>
+					<Input
+						label='Email'
+						placeholder='Введите email'
+						type='email'
+						error={formState.errors.email?.message}
+						{...register('email')}
+					/>
+					<Input
+						label='Пароль'
+						placeholder='Введите пароль'
+						type='password'
+						error={formState.errors.password?.message}
+						{...register('password')}
+					/>
+				</>
+			)}
+			renderFooter={() => <Button disabled={isPending}>Войти</Button>}
+		/>
+	)
+}

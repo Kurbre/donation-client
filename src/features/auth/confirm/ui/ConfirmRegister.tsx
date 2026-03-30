@@ -5,10 +5,16 @@ import { SuccessIcon } from '@/shared/ui/success-icon'
 import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { Suspense, useEffect } from 'react'
 import { confirmRegisterFetch } from '../api/confirm-register-fetch'
-import { useEffect } from 'react'
 
-export default function ConfigrmRegister() {
+const LoadingState = () => (
+	<div className='flex items-center justify-center flex-1 text-center font-semibold text-xl'>
+		Загрузка...
+	</div>
+)
+
+function ConfirmRegisterContent() {
 	const params = useSearchParams()
 	const router = useRouter()
 	const token = params.get('token')
@@ -29,14 +35,9 @@ export default function ConfigrmRegister() {
 			return
 		}
 		mutate()
-	}, [])
+	}, [token, mutate, router])
 
-	if (isPending)
-		return (
-			<div className='flex items-center justify-center flex-1 text-center font-semibold text-xl'>
-				Загрузка...
-			</div>
-		)
+	if (isPending) return <LoadingState />
 
 	if (isError || !isSuccess) {
 		return null
@@ -54,7 +55,7 @@ export default function ConfigrmRegister() {
 					<div className='flex flex-col items-center'>
 						<SuccessIcon />
 						<p className='text-center font-semibold text-lg'>
-							Вы успешно зарегестрировались на нашем сайте. Чтобы перейти в
+							Вы успешно зарегистрировались на нашем сайте. Чтобы перейти в
 							личный кабинет, нажмите на кнопку ниже
 						</p>
 					</div>
@@ -66,5 +67,13 @@ export default function ConfigrmRegister() {
 				)}
 			/>
 		</div>
+	)
+}
+
+export default function ConfirmRegister() {
+	return (
+		<Suspense fallback={<LoadingState />}>
+			<ConfirmRegisterContent />
+		</Suspense>
 	)
 }

@@ -2,7 +2,7 @@ import { Header } from '@/widgets/header'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Open_Sans, Roboto_Serif } from 'next/font/google'
 import { PropsWithChildren } from 'react'
-import './globals.css'
+import './assets/globals.css'
 import Providers from './providers'
 
 const geistSans = Geist({
