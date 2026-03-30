@@ -1,4 +1,5 @@
 import { checkAuth } from '@/entities/user'
+import { LogoutButton } from '@/features/auth/logout'
 import { Button } from '@/shared/ui/button'
 import Link from 'next/link'
 
@@ -14,10 +15,12 @@ export default async function Header() {
 					Donation
 				</Link>
 				<div className='flex items-center gap-5'>
-					{!isAuth && (
+					{!isAuth ? (
 						<Link href='/auth/login'>
 							<Button>Войти</Button>
 						</Link>
+					) : (
+						<LogoutButton />
 					)}
 				</div>
 			</div>
