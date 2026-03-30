@@ -42,7 +42,7 @@ export default function LoginForm() {
 			onSubmit={handleSubmit(submitHandler)}
 			footerPosition='center'
 			renderTitle={() => (
-				<h3 className='font-sans text-2xl font-semibold text-center'>
+				<h3 className='font-sans text-2xl font-semibold text-center text-neon-gradient'>
 					Авторизация
 				</h3>
 			)}
@@ -64,7 +64,11 @@ export default function LoginForm() {
 					/>
 				</>
 			)}
-			renderFooter={() => <Button disabled={isPending}>Войти</Button>}
+			renderFooter={() => (
+				<Button disabled={isPending} className='w-full'>
+					Войти
+				</Button>
+			)}
 		/>
 	)
 }

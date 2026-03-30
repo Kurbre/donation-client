@@ -12,7 +12,7 @@ export default function Form({
 	return (
 		<form
 			className={cn(
-				'bg-foreground-dark px-6 py-3 rounded-xl flex flex-col max-w-112.5 w-full mx-auto',
+				'bg-[rgba(49,49,49,0.4)] backdrop-blur-md shadow-2xl px-6 py-3 rounded-xl flex flex-col max-w-112.5 w-full mx-auto',
 				className
 			)}
 			{...props}

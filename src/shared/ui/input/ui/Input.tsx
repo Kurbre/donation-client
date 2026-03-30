@@ -10,7 +10,10 @@ const InputComponent = forwardRef<HTMLInputElement, Input>(
 		return (
 			<div>
 				{label && (
-					<label htmlFor={id} className='font-sans font-semibold text-sm'>
+					<label
+						htmlFor={id}
+						className='font-sans font-semibold text-sm text-gray-400'
+					>
 						{label}
 					</label>
 				)}
@@ -20,11 +23,12 @@ const InputComponent = forwardRef<HTMLInputElement, Input>(
 					ref={ref}
 					{...props}
 					className={cn(
-						'bg-white neon-outline mt-2 dark:bg-foreground-dark rounded-full outline-none px-6 pt-3 pb-3.5 w-full text-sm focus:scale-103',
+						'neon-outline mt-2 dark:bg-foreground-dark rounded-full outline-none px-6 pt-3 pb-3.5 w-full text-sm focus:scale-103',
+						error && 'neon-error',
 						className
 					)}
 				/>
-				{error && <span className='text-xs text-red-500'>{error}</span>}
+				{error && <span className='text-xs text-error'>{error}</span>}
 			</div>
 		)
 	}

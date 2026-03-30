@@ -6,6 +6,8 @@
 	--main: #49b7e3;
 	--foremain: #167da6;
 	--foreground-dark: #313131;
+	--error: #ff4d4d;
+	--error-focus: #ed3232;
 }
 
 @theme inline {
@@ -14,7 +16,8 @@
 	--color-main: var(--main);
 	--color-foremain: var(--foremain);
 	--color-foreground-dark: var(--foreground-dark);
-	--color-silver: #8e8e8e;
+	--color-silver: #636363;
+	--color-error: var(--error);
 
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
@@ -30,12 +33,23 @@
 }
 
 body {
-	background: var(--background);
+	background-color: var(--background);
+	/* Создаем слои: Шум + Основной радиальный градиент */
+	background-image: 
+        /* Слой шума (опционально через URL) */
+		url('https://www.transparenttextures.com/patterns/stardust.png'),
+		/* Радиальное свечение из центра */
+		radial-gradient(
+				circle at 50% 50%,
+				color-mix(in srgb, var(--main), transparent 85%) 0%,
+				transparent 60%
+			),
+		/* Темный виньетный градиент */
+		radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
+	background-attachment: fixed;
 	color: var(--foreground);
-	display: flex;
-	flex-direction: column;
-	min-height: 100%;
-	@apply font-open-sans;
+	min-height: 100vh;
+	@apply font-open-sans flex flex-col;
 }
 
 body > main {
@@ -62,7 +76,7 @@ body > main {
 }
 
 .text-neon-gradient {
-	@apply bg-linear-to-b from-main to-foremain bg-clip-text text-transparent inline-block;
+	@apply bg-linear-to-b from-main to-foremain bg-clip-text text-transparent;
 	filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.3));
 }
 
@@ -99,4 +113,25 @@ input.neon-outline:focus {
 
 .neon-outline:active:not(:disabled) {
 	@apply scale-98;
+}
+
+.neon-error {
+	border-color: var(--error) !important; /* Насыщенный красный */
+	color: #ffcccc !important;
+	background: rgba(255, 77, 77, 0.05) !important;
+
+	/* Красное неоновое свечение */
+	box-shadow:
+		0 0 10px rgba(255, 77, 77, 0.3),
+		0 0 20px rgba(255, 77, 77, 0.1) !important;
+}
+
+/* Эффект при фокусе на поле с ошибкой */
+input.neon-error:focus {
+	border-color: var(--error-focus) !important;
+	box-shadow:
+		0 0 15px rgba(255, 0, 0, 0.5),
+		0 0 30px rgba(255, 0, 0, 0.2) !important;
+	background: rgba(255, 77, 77, 0.1) !important;
+	color: #fff !important;
 }
