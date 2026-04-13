@@ -9,8 +9,8 @@ import { useForm } from 'react-hook-form'
 import { MdOutlineMail } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { sendResetPasswordFetch } from '../api/send-reset-password-fetch'
-import { resetPasswordSchema } from '../model/reset-password-schema'
-import { ResetPassword, ResetPasswordData } from '../model/types'
+import { sendResetPasswordSchema } from '../model/send-reset-password-schema'
+import { SendResetPassword, ResetPasswordData } from '../model/types'
 import { SuccessIcon } from '@/shared/ui/success-icon'
 
 export default function ResetPasswordForm() {
@@ -19,12 +19,12 @@ export default function ResetPasswordForm() {
 		onError: err => toast.error(err.message)
 	})
 
-	const { handleSubmit, formState, register } = useForm<ResetPassword>({
-		resolver: zodResolver(resetPasswordSchema),
+	const { handleSubmit, formState, register } = useForm<SendResetPassword>({
+		resolver: zodResolver(sendResetPasswordSchema),
 		mode: 'onChange'
 	})
 
-	const submitHandler = async (data: ResetPassword) => mutateAsync(data)
+	const submitHandler = async (data: SendResetPassword) => mutateAsync(data)
 
 	return (
 		<Form
@@ -68,7 +68,7 @@ export default function ResetPasswordForm() {
 					)}
 					<div className='mt-6 flex justify-between items-center'>
 						<Link
-							href='/auth/reset-password'
+							href='/auth/login'
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
 							Уже есть аккаунт? Войти

@@ -24,14 +24,14 @@ const InputComponent = forwardRef<HTMLInputElement, Input>(
 						ref={ref}
 						{...props}
 						className={cn(
-							'neon-outline mt-2 dark:bg-foreground-dark rounded-full outline-none pt-3 pb-3.5 w-full text-sm focus:scale-103 peer',
+							'mt-2 dark:bg-foreground-dark rounded-full outline-none pt-3 pb-3.5 w-full text-sm',
 							error && 'neon-error',
 							icon ? 'px-13' : 'px-6',
 							className
 						)}
 					/>
 					{icon && (
-						<span className='absolute top-[56.5%] -translate-y-1/2 left-5 peer-focus:left-4 transition-all duration-300'>
+						<span className='absolute top-[56.5%] -translate-y-1/2 left-5 transition-all duration-300'>
 							{icon()}
 						</span>
 					)}
