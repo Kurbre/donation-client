@@ -18,7 +18,7 @@ import Link from 'next/link'
 export default function LoginForm() {
 	const router = useRouter()
 
-	const { mutateAsync, isPending } = useMutation({
+	const { mutate, isPending } = useMutation({
 		mutationFn: (data: LoginData) => loginFetch(data),
 		onSuccess: data => {
 			toast.success(`${data.name} вы успешно авторизовались`)
@@ -38,7 +38,7 @@ export default function LoginForm() {
 		mode: 'onChange'
 	})
 
-	const submitHandler = async (data: Login) => mutateAsync(data)
+	const submitHandler = (data: Login) => mutate(data)
 
 	return (
 		<Form
@@ -57,6 +57,7 @@ export default function LoginForm() {
 						type='email'
 						error={formState.errors.email?.message}
 						icon={() => <MdOutlineMail size={21} className='text-gray-400' />}
+						data-testid='email-login-input'
 						{...register('email')}
 					/>
 					<Input
@@ -65,13 +66,18 @@ export default function LoginForm() {
 						type='password'
 						error={formState.errors.password?.message}
 						icon={() => <CiLock size={21} className='text-gray-400' />}
+						data-testid='password-login-input'
 						{...register('password')}
 					/>
 				</>
 			)}
 			renderFooter={() => (
 				<div className='w-full mb-2'>
-					<Button disabled={isPending} className='w-full'>
+					<Button
+						disabled={isPending}
+						className='w-full'
+						data-testid='login-button'
+					>
 						Войти
 					</Button>
 					<div className='mt-6 flex justify-between items-center'>
@@ -85,7 +91,7 @@ export default function LoginForm() {
 							href='/auth/register'
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
-							Ещё нет аккаунта? Зарегестрироваться
+							Ещё нет аккаунта? Зарегистрироваться
 						</Link>
 					</div>
 				</div>

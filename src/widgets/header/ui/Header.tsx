@@ -12,10 +12,7 @@ export default async function Header() {
 			<div className='container flex justify-between items-center py-3'>
 				<div className='flex items-center gap-2'>
 					<BiDonateHeart size={28} className='text-main' />
-					<Link
-						href='/'
-						className='text-neon-gradient w-fit text-2xl font-mono'
-					>
+					<Link href='/' className='w-fit text-2xl font-mono'>
 						Donation
 					</Link>
 				</div>
@@ -23,7 +20,7 @@ export default async function Header() {
 					{!isAuth ? (
 						<Link href='/auth/login'>
 							<Button styledBorder>
-								<span className='text-neon-gradient'>Войти</span>
+								<span>Войти</span>
 							</Button>
 						</Link>
 					) : (
