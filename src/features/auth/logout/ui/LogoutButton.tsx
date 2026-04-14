@@ -7,20 +7,16 @@ import { toast } from 'react-toastify'
 
 export default function LogoutButton() {
 	const router = useRouter()
-	const { mutateAsync } = useMutation({
+	const { mutate } = useMutation({
 		mutationFn: logoutFetch,
 		onSuccess: data => {
 			toast.success(data.message)
+			router.refresh()
 		}
 	})
 
-	const clickHandler = async () => {
-		await mutateAsync()
-		router.refresh()
-	}
-
 	return (
-		<Button onClick={clickHandler} styledBorder>
+		<Button onClick={() => mutate()} styledBorder>
 			Выйти
 		</Button>
 	)

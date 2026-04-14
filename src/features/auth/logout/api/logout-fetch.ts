@@ -9,7 +9,7 @@ export const logoutFetch = async () => {
 		return res.data
 	} catch (e) {
 		if (axios.isAxiosError(e)) {
-			const message = e.response?.data?.message ?? 'Ошибка авторизации'
+			const message = e.response?.data?.message ?? 'Ошибка выхода из аккаунта'
 			throw new Error(message)
 		}
 
