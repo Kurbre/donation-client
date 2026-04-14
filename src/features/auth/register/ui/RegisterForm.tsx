@@ -14,15 +14,10 @@ import Link from 'next/link'
 import { MdOutlineMail } from 'react-icons/md'
 import { CiLock } from 'react-icons/ci'
 import { FaRegUser } from 'react-icons/fa'
-import { toast } from 'react-toastify'
 
 export default function RegisterForm() {
-	const router = useRouter()
-
-	const { mutateAsync, isSuccess, isPending } = useMutation({
-		mutationFn: (data: RegisterData) => registerFetch(data),
-		onSuccess: data => {},
-		onError: err => toast.error(err.message)
+	const { mutate, isSuccess, isPending } = useMutation({
+		mutationFn: (data: RegisterData) => registerFetch(data)
 	})
 
 	const { handleSubmit, formState, register } = useForm<Register>({
@@ -30,8 +25,8 @@ export default function RegisterForm() {
 		mode: 'onChange'
 	})
 
-	const submitHandler = async ({ repeatPassword, ...data }: Register) => {
-		await mutateAsync(data)
+	const submitHandler = ({ repeatPassword, ...data }: Register) => {
+		mutate(data)
 	}
 
 	return (
@@ -45,7 +40,10 @@ export default function RegisterForm() {
 			)}
 			renderContent={() =>
 				isSuccess ? (
-					<div className='flex flex-col items-center'>
+					<div
+						className='flex flex-col items-center'
+						data-testid='success-register'
+					>
 						<SuccessIcon />
 						<p className='text-center font-semibold text-lg text-gray-300'>
 							Если email не зарегестрирован, письмо отправлено. Пожалуйста
@@ -60,6 +58,7 @@ export default function RegisterForm() {
 							type='email'
 							error={formState.errors.email?.message}
 							icon={() => <MdOutlineMail size={21} className='text-gray-400' />}
+							data-testid='email-input-register'
 							{...register('email')}
 						/>
 						<Input
@@ -67,6 +66,7 @@ export default function RegisterForm() {
 							placeholder='Введите имя'
 							error={formState.errors.name?.message}
 							icon={() => <FaRegUser size={21} className='text-gray-400' />}
+							data-testid='name-input-register'
 							{...register('name')}
 						/>
 						<Input
@@ -74,6 +74,7 @@ export default function RegisterForm() {
 							placeholder='Введите фамилию'
 							error={formState.errors.surname?.message}
 							icon={() => <FaRegUser size={21} className='text-gray-400' />}
+							data-testid='surname-input-register'
 							{...register('surname')}
 						/>
 						<Input
@@ -82,6 +83,7 @@ export default function RegisterForm() {
 							type='password'
 							error={formState.errors.password?.message}
 							icon={() => <CiLock size={21} className='text-gray-400' />}
+							data-testid='password-input-register'
 							{...register('password')}
 						/>
 						<Input
@@ -90,6 +92,7 @@ export default function RegisterForm() {
 							type='password'
 							error={formState.errors.repeatPassword?.message}
 							icon={() => <CiLock size={21} className='text-gray-400' />}
+							data-testid='repeat-password-input-register'
 							{...register('repeatPassword')}
 						/>
 					</>
@@ -103,7 +106,7 @@ export default function RegisterForm() {
 						</Link>
 					) : (
 						<Button disabled={isPending} className='w-full'>
-							Зарегестрироваться
+							Зарегистрироваться
 						</Button>
 					)}
 					<div className='mt-6 flex justify-center items-center'>
