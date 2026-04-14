@@ -12,6 +12,9 @@ export default function LogoutButton() {
 		onSuccess: data => {
 			toast.success(data.message)
 			router.refresh()
+		},
+		onError: error => {
+			toast.error(error.message)
 		}
 	})
 

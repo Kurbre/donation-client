@@ -1,29 +1,12 @@
-import Providers from '@/app/providers'
-import { mockUser } from '@/shared/utils/mocks'
-import { render, screen, waitFor } from '@testing-library/react'
+import { mockBack, mockPush, mockUser, render } from '@/shared/utils/tests'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as api from '../api/login-fetch'
 import LoginForm from './LoginForm'
 
-const mockPush = jest.fn()
-const mockBack = jest.fn()
-const mockRefresh = jest.fn()
-
-jest.mock('next/navigation', () => ({
-	useRouter: () => ({
-		push: mockPush,
-		back: mockBack,
-		refresh: mockRefresh
-	})
-}))
-
 describe('Login form', () => {
 	beforeEach(() => {
-		render(
-			<Providers>
-				<LoginForm />
-			</Providers>
-		)
+		render(<LoginForm />)
 	})
 
 	afterEach(() => {
