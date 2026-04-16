@@ -15,7 +15,7 @@ import { SuccessIcon } from '@/shared/ui/success-icon'
 import { ROUTES } from '@/shared/utils/routes'
 
 export default function ResetPasswordForm() {
-	const { mutateAsync, isPending, isSuccess } = useMutation({
+	const { mutate, isPending, isSuccess } = useMutation({
 		mutationFn: (data: ResetPasswordData) => sendResetPasswordFetch(data),
 		onError: err => toast.error(err.message)
 	})
@@ -25,7 +25,7 @@ export default function ResetPasswordForm() {
 		mode: 'onChange'
 	})
 
-	const submitHandler = async (data: SendResetPassword) => mutateAsync(data)
+	const submitHandler = (data: SendResetPassword) => mutate(data)
 
 	return (
 		<Form
@@ -38,7 +38,10 @@ export default function ResetPasswordForm() {
 			)}
 			renderContent={() =>
 				isSuccess ? (
-					<div className='flex flex-col items-center'>
+					<div
+						className='flex flex-col items-center'
+						data-testid='success-section'
+					>
 						<SuccessIcon />
 						<p className='text-center font-semibold text-lg text-gray-300'>
 							Если email зарегестрирован, письмо отправлено. Пожалуйста
@@ -78,7 +81,7 @@ export default function ResetPasswordForm() {
 							href={ROUTES.register}
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
-							Ещё нет аккаунта? Зарегестрироваться
+							Ещё нет аккаунта? Зарегистрироваться
 						</Link>
 					</div>
 				</div>
