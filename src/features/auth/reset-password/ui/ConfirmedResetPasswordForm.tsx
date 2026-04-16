@@ -14,6 +14,7 @@ import { resetPasswordTokenFetch } from '../api/reset-password-token-fetch'
 import { resetPasswordSchema } from '../model/reset-password-schema'
 import { ResetPassword } from '../model/types'
 import { SuccessIcon } from '@/shared/ui/success-icon'
+import { ROUTES } from '@/shared/utils/routes'
 
 const LoadingState = () => (
 	<div className='flex items-center justify-center flex-1 text-center font-semibold text-xl'>
@@ -102,7 +103,7 @@ function ConfirmedResetPasswordContent() {
 				}
 				renderFooter={() =>
 					data ? (
-						<Link href='/auth/login' className='mx-auto'>
+						<Link href={ROUTES.login} className='mx-auto'>
 							<Button disabled={isLoading || isPending}>Авторизоваться</Button>
 						</Link>
 					) : (

@@ -12,6 +12,7 @@ import { sendResetPasswordFetch } from '../api/send-reset-password-fetch'
 import { sendResetPasswordSchema } from '../model/send-reset-password-schema'
 import { SendResetPassword, ResetPasswordData } from '../model/types'
 import { SuccessIcon } from '@/shared/ui/success-icon'
+import { ROUTES } from '@/shared/utils/routes'
 
 export default function ResetPasswordForm() {
 	const { mutateAsync, isPending, isSuccess } = useMutation({
@@ -68,13 +69,13 @@ export default function ResetPasswordForm() {
 					)}
 					<div className='mt-6 flex justify-between items-center'>
 						<Link
-							href='/auth/login'
+							href={ROUTES.login}
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
 							Уже есть аккаунт? Войти
 						</Link>
 						<Link
-							href='/auth/register'
+							href={ROUTES.register}
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
 							Ещё нет аккаунта? Зарегестрироваться

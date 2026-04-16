@@ -3,6 +3,7 @@ import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as api from '../api/login-fetch'
 import LoginForm from './LoginForm'
+import { ROUTES } from '@/shared/utils/routes'
 
 describe('Login form', () => {
 	beforeEach(() => {
@@ -64,7 +65,7 @@ describe('Login form', () => {
 
 		await userEvent.click(resetPasswordLink)
 
-		expect(resetPasswordLink).toHaveAttribute('href', '/auth/reset-password')
+		expect(resetPasswordLink).toHaveAttribute('href', ROUTES.resetPassword)
 	})
 
 	test('Should navigate to registration page', async () => {
@@ -76,7 +77,7 @@ describe('Login form', () => {
 
 		await userEvent.click(registerLink)
 
-		expect(registerLink).toHaveAttribute('href', '/auth/register')
+		expect(registerLink).toHaveAttribute('href', ROUTES.register)
 	})
 
 	test('Should call router.back() if referrer exists', async () => {

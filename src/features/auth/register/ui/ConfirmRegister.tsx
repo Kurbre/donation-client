@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
 import { confirmRegisterFetch } from '../api/confirm-register-fetch'
+import { ROUTES } from '@/shared/utils/routes'
 
 const LoadingState = () => (
 	<div className='flex items-center justify-center flex-1 text-center font-semibold text-xl'>
@@ -20,7 +21,7 @@ function ConfirmRegisterContent() {
 	const token = params.get('token')
 
 	const { mutate, isError, isSuccess, isPending } = useMutation({
-		mutationFn: () => confirmRegisterFetch(token!),
+		mutationFn: (t: string) => confirmRegisterFetch(t),
 		onError: () => {
 			router.push('/')
 		},
@@ -34,8 +35,9 @@ function ConfirmRegisterContent() {
 			router.push('/')
 			return
 		}
-		mutate()
-	}, [token, mutate, router])
+
+		mutate(token)
+	}, [token])
 
 	if (isPending) return <LoadingState />
 
@@ -61,7 +63,7 @@ function ConfirmRegisterContent() {
 					</div>
 				)}
 				renderFooter={() => (
-					<Link href='/profile' className='mx-auto'>
+					<Link href={ROUTES.profile} className='mx-auto'>
 						<Button>Перейти в личный кабинет</Button>
 					</Link>
 				)}

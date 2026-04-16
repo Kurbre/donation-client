@@ -5,15 +5,15 @@ import { Input } from '@/shared/ui/input'
 import { SuccessIcon } from '@/shared/ui/success-icon'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
+import { CiLock } from 'react-icons/ci'
+import { FaRegUser } from 'react-icons/fa'
+import { MdOutlineMail } from 'react-icons/md'
 import { registerFetch } from '../api/register-fetch'
 import { registerSchema } from '../model/register-schema'
 import { Register, RegisterData } from '../model/types'
-import Link from 'next/link'
-import { MdOutlineMail } from 'react-icons/md'
-import { CiLock } from 'react-icons/ci'
-import { FaRegUser } from 'react-icons/fa'
+import { ROUTES } from '@/shared/utils/routes'
 
 export default function RegisterForm() {
 	const { mutate, isSuccess, isPending } = useMutation({
@@ -111,7 +111,7 @@ export default function RegisterForm() {
 					)}
 					<div className='mt-6 flex justify-center items-center'>
 						<Link
-							href='/auth/login'
+							href={ROUTES.login}
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
 							Уже есть аккаунт? Войти

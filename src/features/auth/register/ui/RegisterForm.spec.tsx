@@ -3,6 +3,7 @@ import RegisterForm from './RegisterForm'
 import { screen } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import * as registerApi from '../api/register-fetch'
+import { ROUTES } from '@/shared/utils/routes'
 
 describe('Register form', () => {
 	afterEach(() => {
@@ -48,6 +49,12 @@ describe('Register form', () => {
 		expect(registerfetchMock).toHaveBeenCalledTimes(1)
 
 		expect(screen.getByTestId('success-register')).toBeInTheDocument()
+
+		const mainLink = await screen.findByRole('link', {
+			name: /главную/i
+		})
+
+		expect(mainLink).toHaveAttribute('href', '/')
 	})
 
 	test('should display validation errors for empty fields', async () => {
@@ -70,5 +77,16 @@ describe('Register form', () => {
 		expect(screen.getAllByText(/пароля/i)[1]).toBeInTheDocument()
 
 		expect(registerfetchMock).not.toHaveBeenCalled()
+	})
+
+	test('should redirect auth link', async () => {
+		render(<RegisterForm />)
+
+		const authLink = await screen.findByRole('link', {
+			name: /войти/i
+		})
+
+		expect(authLink).toBeInTheDocument()
+		expect(authLink).toHaveAttribute('href', ROUTES.login)
 	})
 })

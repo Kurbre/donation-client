@@ -14,6 +14,7 @@ import { toast } from 'react-toastify'
 import { MdOutlineMail } from 'react-icons/md'
 import { CiLock } from 'react-icons/ci'
 import Link from 'next/link'
+import { ROUTES } from '@/shared/utils/routes'
 
 export default function LoginForm() {
 	const router = useRouter()
@@ -82,13 +83,13 @@ export default function LoginForm() {
 					</Button>
 					<div className='mt-6 flex justify-between items-center'>
 						<Link
-							href='/auth/reset-password'
+							href={ROUTES.resetPassword}
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
 							Забыли пароль?
 						</Link>
 						<Link
-							href='/auth/register'
+							href={ROUTES.register}
 							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
 						>
 							Ещё нет аккаунта? Зарегистрироваться

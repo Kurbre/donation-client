@@ -16,7 +16,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				)}
 				{...props}
 			>
-				<span className={cn(styledBorder && '')}>{children}</span>
+				<span className={cn(styledBorder)}>{children}</span>
 			</button>
 		)
 	}
