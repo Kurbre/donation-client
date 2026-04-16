@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 export default function LogoutButton() {
 	const router = useRouter()
-	const { mutate } = useMutation({
+	const { mutate, isPending } = useMutation({
 		mutationFn: logoutFetch,
 		onSuccess: data => {
 			toast.success(data.message)
@@ -19,7 +19,7 @@ export default function LogoutButton() {
 	})
 
 	return (
-		<Button onClick={() => mutate()} styledBorder>
+		<Button onClick={() => mutate()} disabled={isPending} styledBorder>
 			Выйти
 		</Button>
 	)

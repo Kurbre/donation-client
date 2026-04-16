@@ -6,7 +6,7 @@ export const confirmRegisterFetch = async (
 	token: string
 ): Promise<ConfirmRegisterFetchResponse> => {
 	try {
-		const res = await axiosMain.post(
+		const res = await axiosMain.post<ConfirmRegisterFetchResponse>(
 			'/auth/confirmed-register',
 			{},
 			{
@@ -19,7 +19,8 @@ export const confirmRegisterFetch = async (
 		return res.data
 	} catch (e) {
 		if (axios.isAxiosError(e)) {
-			const message = e.response?.data?.message ?? 'Ошибка авторизации'
+			const message =
+				e.response?.data?.message ?? 'Ошибка подстверждения регистрации'
 			throw new Error(message)
 		}
 

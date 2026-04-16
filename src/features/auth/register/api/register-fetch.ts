@@ -9,7 +9,7 @@ export const registerFetch = async (data: RegisterData) => {
 		return res.data
 	} catch (e) {
 		if (axios.isAxiosError(e)) {
-			const message = e.response?.data?.message ?? 'Ошибка авторизации'
+			const message = e.response?.data?.message ?? 'Ошибка регистрации'
 			throw new Error(message)
 		}
 
