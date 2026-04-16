@@ -59,7 +59,7 @@ function ConfirmedResetPasswordContent() {
 			router.push('/')
 			return
 		}
-	}, [token, router, isTokenError])
+	}, [token, isTokenError])
 
 	if (isPending || isLoading) return <LoadingState />
 
@@ -77,7 +77,10 @@ function ConfirmedResetPasswordContent() {
 				)}
 				renderContent={() =>
 					data ? (
-						<div className='flex flex-col items-center'>
+						<div
+							className='flex flex-col items-center'
+							data-testid='success-section'
+						>
 							<SuccessIcon />
 							<p className='text-center font-semibold text-lg text-gray-300'>
 								Вы успешно изменили пароль. Вы можете войти в аккаунт по кнопке
@@ -87,14 +90,16 @@ function ConfirmedResetPasswordContent() {
 					) : (
 						<>
 							<Input
-								label='Введите новый пароль'
+								label='Пароль'
 								error={formState.errors.password?.message}
 								type='password'
+								placeholder='Введите новый пароль'
 								{...register('password')}
 							/>
 							<Input
-								label='Повторите новый пароль'
+								label='Повторите пароль'
 								error={formState.errors.repeatPassword?.message}
+								placeholder='Повторите новый пароль'
 								type='password'
 								{...register('repeatPassword')}
 							/>
@@ -110,7 +115,7 @@ function ConfirmedResetPasswordContent() {
 						<Button
 							type='submit'
 							className='mx-auto'
-							disabled={isLoading && isPending}
+							disabled={isLoading || isPending}
 						>
 							Сбросить пароль
 						</Button>
