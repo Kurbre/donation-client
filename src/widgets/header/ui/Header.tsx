@@ -8,10 +8,6 @@ import { BiDonateHeart } from 'react-icons/bi'
 export default async function Header() {
 	const isAuth = await checkAuth()
 
-	const cookieStore = await cookies()
-
-	console.log(cookieStore.getAll())
-
 	return (
 		<header className='bg-[#1c1c1c]'>
 			<div className='container flex justify-between items-center py-3'>

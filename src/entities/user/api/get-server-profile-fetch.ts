@@ -5,19 +5,23 @@ import { cookies } from 'next/headers'
 export const getServerProfileFetch = async () => {
 	try {
 		const cookieStore = await cookies()
+		const token = cookieStore.get('access_token')?.value
+
+		if (!token) return { isSuccess: false, data: 'No token' }
+
 		const res = await axiosMain.get('/users/profile', {
 			headers: {
-				cookie: cookieStore.toString()
+				Cookie: `access_token=${token}`
 			}
 		})
-
-		console.log(res.headers)
 
 		return {
 			isSuccess: true,
 			data: res.data
 		}
 	} catch (e) {
+		console.log(e)
+
 		if (axios.isAxiosError(e)) {
 			const message = e.response?.data?.message ?? 'Ошибка авторизации'
 
