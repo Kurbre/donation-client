@@ -1,0 +1,28 @@
+name: GitHub Actions Donation
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [24.x]
+    env:
+      NEXT_PUBLIC_API_URL: http://localhost:3002/api
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: 'yarn'
+      - name: install modules
+        run: yarn
+      - name: build project
+        run: yarn build
+      - name: unit test
+        run: yarn test
