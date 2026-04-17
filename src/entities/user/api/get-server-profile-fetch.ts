@@ -1,15 +1,13 @@
 import { axiosMain } from '@/shared/api/axios'
 import axios from 'axios'
-import { cookies } from 'next/headers'
+import { headers } from 'next/headers'
 
 export const getServerProfileFetch = async () => {
 	try {
-		const cookieHeader = await cookies()
+		const headersStore = await headers()
 		const res = await axiosMain.get('/users/profile', {
-			headers: { Cookie: cookieHeader.toString() }
+			headers: { Cookie: headersStore.get('cookie') ?? '' }
 		})
-
-		console.log(res.headers, res.data)
 
 		return {
 			isSuccess: true,
