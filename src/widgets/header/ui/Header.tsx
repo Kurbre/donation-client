@@ -1,11 +1,16 @@
 import { checkAuth } from '@/entities/user'
 import { LogoutButton } from '@/features/auth/logout'
 import { Button } from '@/shared/ui/button'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { BiDonateHeart } from 'react-icons/bi'
 
 export default async function Header() {
 	const isAuth = await checkAuth()
+
+	const cookieStore = await cookies()
+
+	console.log(cookieStore.getAll())
 
 	return (
 		<header className='bg-[#1c1c1c]'>

@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers'
 import { getServerProfileFetch } from '../api/get-server-profile-fetch'
 
 export const checkAuth = async () => {
