@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: '/api/:path*',
-				destination: `https://donation-server-6j13.onrender.com/api/:path*`
+				destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`
 			}
 		]
 	}
