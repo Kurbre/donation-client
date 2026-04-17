@@ -1,11 +1,18 @@
 'use client'
 import Image from 'next/image'
 import { useAuth } from '../lib/useAuth'
+import { Skeleton } from '@/shared/ui/shadcn/skeleton'
 
 export default function UserInfo() {
-	const { user, isAuth } = useAuth()
+	const { user, isLoading } = useAuth()
 
-	if (!isAuth || !user) return
+	if (isLoading || !user)
+		return (
+			<div className='flex items-center gap-1'>
+				<Skeleton className='h-11.25 w-11.25 rounded-full' />
+				<Skeleton className='h-6 w-20' />
+			</div>
+		)
 
 	return (
 		<div className='flex items-center gap-1'>

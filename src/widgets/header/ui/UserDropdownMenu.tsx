@@ -19,7 +19,6 @@ import { IoMdArrowDropdown, IoMdExit, IoMdSettings } from 'react-icons/io'
 
 export function UserDropdownMenu() {
 	const [isOpenMenu, setIsOpenMenu] = useState(false)
-
 	const { mutate: mutateLogout, isPending: isPendingLogout } = useLogout()
 
 	return (
