@@ -1,10 +1,10 @@
 import { axiosMain } from '@/shared/api/axios'
 import axios from 'axios'
-import { cookies } from 'next/headers'
+import { User } from '../model/types'
 
-export const getProfileFetch = async (isSSR: boolean = false) => {
+export const getProfileFetch = async () => {
 	try {
-		const res = await axiosMain.get('/users/profile')
+		const res = await axiosMain.get<User>('/users/profile')
 
 		return res.data
 	} catch (e) {

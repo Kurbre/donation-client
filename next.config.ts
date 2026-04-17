@@ -8,6 +8,20 @@ const nextConfig: NextConfig = {
 				destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`
 			}
 		]
+	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'http',
+				hostname: 'res.cloudinary.com',
+				pathname: '**'
+			},
+			{
+				protocol: 'https',
+				hostname: 'res.cloudinary.com',
+				pathname: '**'
+			}
+		]
 	}
 }
 

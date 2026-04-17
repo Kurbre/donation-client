@@ -1,0 +1,75 @@
+'use client'
+
+import UserInfo from '@/entities/user/ui/UserInfo'
+import { useLogout } from '@/features/auth/logout'
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger
+} from '@/shared/ui/shadcn/dropdown-menu'
+import { cn } from '@/shared/utils/classNames'
+import { ROUTES } from '@/shared/utils/routes'
+import Link from 'next/link'
+import { useState } from 'react'
+import { FaRegUserCircle } from 'react-icons/fa'
+import { IoMdArrowDropdown, IoMdExit, IoMdSettings } from 'react-icons/io'
+
+export function UserDropdownMenu() {
+	const [isOpenMenu, setIsOpenMenu] = useState(false)
+
+	const { mutate: mutateLogout, isPending: isPendingLogout } = useLogout()
+
+	return (
+		<DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>
+			<DropdownMenuTrigger>
+				<div className='flex items-center gap-1 cursor-pointer'>
+					<UserInfo />
+					<span
+						className={cn(
+							'inline-block transform transition-transform ease-in-out duration-200 rotate-180',
+							isOpenMenu && 'rotate-0'
+						)}
+					>
+						<IoMdArrowDropdown size={31} />
+					</span>
+				</div>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent align='start'>
+				<DropdownMenuGroup>
+					<DropdownMenuItem>
+						<Link
+							href={ROUTES.profile}
+							className='flex items-center gap-2 cursor-pointer'
+						>
+							<FaRegUserCircle />
+							<span className='-mt-0.5'>Профиль</span>
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							href={ROUTES.profile}
+							className='flex items-center gap-2 cursor-pointer'
+						>
+							<IoMdSettings />
+							<span className='-mt-0.5'>Настройки</span>
+						</Link>
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+				<DropdownMenuSeparator />
+				<DropdownMenuGroup>
+					<DropdownMenuItem
+						className='flex items-center gap-2 cursor-pointer'
+						onClick={() => mutateLogout()}
+						disabled={isPendingLogout}
+					>
+						<IoMdExit />
+						<span className='-mt-0.5'>Выйти</span>
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+			</DropdownMenuContent>
+		</DropdownMenu>
+	)
+}

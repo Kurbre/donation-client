@@ -24,8 +24,7 @@ const InputComponent = forwardRef<HTMLInputElement, Input>(
 						ref={ref}
 						{...props}
 						className={cn(
-							'mt-2 dark:bg-foreground-dark rounded-full outline-none pt-3 pb-3.5 w-full text-sm',
-							error && 'neon-error',
+							'mt-2 bg-foreground-dark rounded-full outline-none pt-3 pb-3.5 w-full text-sm',
 							icon ? 'px-13' : 'px-6',
 							className
 						)}

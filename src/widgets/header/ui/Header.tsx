@@ -1,15 +1,14 @@
 import { checkAuth } from '@/entities/user'
-import { LogoutButton } from '@/features/auth/logout'
 import { Button } from '@/shared/ui/button'
-import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { BiDonateHeart } from 'react-icons/bi'
+import { UserDropdownMenu } from './UserDropdownMenu'
 
 export default async function Header() {
 	const isAuth = await checkAuth()
 
 	return (
-		<header className='bg-[#1c1c1c]'>
+		<header className='bg-foreground-bg'>
 			<div className='container flex justify-between items-center py-3'>
 				<div className='flex items-center gap-2'>
 					<BiDonateHeart size={28} className='text-main' />
@@ -25,7 +24,7 @@ export default async function Header() {
 							</Button>
 						</Link>
 					) : (
-						<LogoutButton />
+						<UserDropdownMenu />
 					)}
 				</div>
 			</div>

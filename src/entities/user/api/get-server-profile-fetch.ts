@@ -1,6 +1,7 @@
 import { axiosMain } from '@/shared/api/axios'
 import axios from 'axios'
 import { cookies } from 'next/headers'
+import { User } from '../model/types'
 
 export const getServerProfileFetch = async (accessToken?: string) => {
 	try {
@@ -10,10 +11,11 @@ export const getServerProfileFetch = async (accessToken?: string) => {
 			const cookieStore = await cookies()
 			token = cookieStore.get('access_token')?.value
 
-			if (!token) return { isSuccess: false, data: 'No token' }
+			if (!token)
+				return { isSuccess: false, error: 'No token', data: undefined }
 		}
 
-		const res = await axiosMain.get('/users/profile', {
+		const res = await axiosMain.get<User>('/users/profile', {
 			headers: {
 				Cookie: `access_token=${token}`
 			}
@@ -31,13 +33,15 @@ export const getServerProfileFetch = async (accessToken?: string) => {
 
 			return {
 				isSuccess: false,
-				data: message
+				data: undefined,
+				error: message
 			}
 		}
 
 		return {
 			isSuccess: false,
-			data: 'Unexpected error'
+			data: undefined,
+			error: 'Unexpected error'
 		}
 	}
 }

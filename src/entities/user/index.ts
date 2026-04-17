@@ -1,1 +1,2 @@
-export { checkAuth } from './model/check-auth'
+export { checkAuth } from './lib/check-auth'
+export { useAuth } from './lib/useAuth'

@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -8,8 +8,10 @@
 	--main: #49b7e3;
 	--foremain: #167da6;
 	--foreground-dark: rgba(49, 49, 49, 0.6);
+	--foreground-bg: #1c1c1c;
 	--error: #ff4d4d;
 	--error-focus: #ed3232;
+
 	--background: oklch(1 0 0);
 	--foreground: oklch(0.145 0 0);
 	--card: oklch(1 0 0);
@@ -52,6 +54,7 @@
 	--color-foreground-dark: var(--foreground-dark);
 	--color-silver: #636363;
 	--color-error: var(--error);
+	--color-foreground-bg: var(--foreground-bg);
 
 	--font-sans: var(--font-sans);
 	--font-mono: var(--font-geist-mono);
@@ -109,6 +112,7 @@ body {
 		radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
 	background-attachment: fixed;
 	min-height: 100vh;
+	color: #fff;
 	@apply font-open-sans flex flex-col;
 }
 
@@ -127,9 +131,9 @@ body > main {
 .dark {
 	--background: oklch(0.145 0 0);
 	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.205 0 0);
+	--card: var(--foreground-bg);
 	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.205 0 0);
+	--popover: var(--foreground-bg);
 	--popover-foreground: oklch(0.985 0 0);
 	--primary: oklch(0.922 0 0);
 	--primary-foreground: oklch(0.205 0 0);
@@ -159,13 +163,13 @@ body > main {
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+	* {
+		@apply border-border outline-ring/50;
 	}
-  body {
-    @apply bg-background text-foreground;
+	body {
+		@apply bg-background text-foreground;
 	}
-  html {
-    @apply font-sans;
+	html {
+		@apply font-sans;
 	}
 }

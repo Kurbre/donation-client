@@ -36,7 +36,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			lang='en'
 			className={`${geistSans.variable} ${geistMono.variable} ${robotoSans.variable} ${openSans.variable} h-full antialiased`}
 		>
-			<body>
+			<body className='dark'>
 				<Providers>
 					<Header />
 					<main>{children}</main>
