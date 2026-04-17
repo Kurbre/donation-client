@@ -8,7 +8,8 @@ import { formatMediaLabel } from '../model/formatMediaLabel'
 
 export default function UploadMedia({
 	setFileSrc,
-	label = 'Загрузить файл'
+	label = 'Загрузить файл',
+	...props
 }: UploadMediaProps) {
 	const ref = useRef<HTMLInputElement>(null)
 
@@ -39,6 +40,7 @@ export default function UploadMedia({
 				className='hidden'
 				onChange={changeHandler}
 				data-testid='upload-file-input'
+				{...props}
 			/>
 		</>
 	)

@@ -2,12 +2,16 @@ import { axiosMain } from '@/shared/api/axios'
 import axios from 'axios'
 import { cookies } from 'next/headers'
 
-export const getServerProfileFetch = async () => {
+export const getServerProfileFetch = async (accessToken?: string) => {
 	try {
-		const cookieStore = await cookies()
-		const token = cookieStore.get('access_token')?.value
+		let token: string | undefined = accessToken
 
-		if (!token) return { isSuccess: false, data: 'No token' }
+		if (!accessToken) {
+			const cookieStore = await cookies()
+			token = cookieStore.get('access_token')?.value
+
+			if (!token) return { isSuccess: false, data: 'No token' }
+		}
 
 		const res = await axiosMain.get('/users/profile', {
 			headers: {

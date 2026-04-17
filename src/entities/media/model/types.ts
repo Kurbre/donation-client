@@ -1,4 +1,9 @@
-import { Dispatch, SetStateAction } from 'react'
+import {
+	DetailedHTMLProps,
+	Dispatch,
+	InputHTMLAttributes,
+	SetStateAction
+} from 'react'
 
 export type MediaResponse = {
 	asset_id: string
@@ -26,4 +31,4 @@ export type MediaResponse = {
 export type UploadMediaProps = {
 	setFileSrc?: Dispatch<SetStateAction<string>>
 	label?: string
-}
+} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>

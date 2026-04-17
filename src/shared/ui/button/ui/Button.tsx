@@ -3,10 +3,11 @@ import { type ButtonProps } from '../model/types'
 import cn from 'classnames'
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	({ children, className, styledBorder, ...props }, ref) => {
+	({ children, className, styledBorder, type, ...props }, ref) => {
 		return (
 			<button
 				ref={ref}
+				type={type}
 				className={cn(
 					'transition hover:scale-104 duration-300 ease-in-out px-6 py-2 rounded-full cursor-pointer font-semibold disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed',
 					styledBorder
