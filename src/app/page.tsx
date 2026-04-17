@@ -1,3 +1,10 @@
+import { UploadMedia } from '@/entities/media'
+
 export default function Home() {
-	return <div>Home page</div>
+	return (
+		<div>
+			<h1>Home page</h1>
+			<UploadMedia />
+		</div>
+	)
 }
