@@ -22,7 +22,7 @@ export default function ResetPasswordForm() {
 
 	const { handleSubmit, formState, register } = useForm<SendResetPassword>({
 		resolver: zodResolver(sendResetPasswordSchema),
-		mode: 'onChange'
+		mode: 'onSubmit'
 	})
 
 	const submitHandler = (data: SendResetPassword) => mutate(data)
@@ -52,7 +52,6 @@ export default function ResetPasswordForm() {
 					<Input
 						label='Email'
 						placeholder='Введите email'
-						type='email'
 						error={formState.errors.email?.message}
 						icon={() => <MdOutlineMail size={21} className='text-gray-400' />}
 						{...register('email')}

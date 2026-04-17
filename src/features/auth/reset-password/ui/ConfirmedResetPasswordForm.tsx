@@ -46,7 +46,7 @@ function ConfirmedResetPasswordContent() {
 	})
 
 	const { register, handleSubmit, formState } = useForm<ResetPassword>({
-		mode: 'onChange',
+		mode: 'onSubmit',
 		resolver: zodResolver(resetPasswordSchema)
 	})
 

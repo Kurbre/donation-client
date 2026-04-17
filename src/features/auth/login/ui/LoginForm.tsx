@@ -36,7 +36,7 @@ export default function LoginForm() {
 
 	const { handleSubmit, formState, register } = useForm<Login>({
 		resolver: zodResolver(loginSchema),
-		mode: 'onChange'
+		mode: 'onSubmit'
 	})
 
 	const submitHandler = (data: Login) => mutate(data)

@@ -22,7 +22,7 @@ export default function RegisterForm() {
 
 	const { handleSubmit, formState, register } = useForm<Register>({
 		resolver: zodResolver(registerSchema),
-		mode: 'onChange'
+		mode: 'onSubmit'
 	})
 
 	const submitHandler = ({ repeatPassword, ...data }: Register) => {
