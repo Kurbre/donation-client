@@ -22,6 +22,7 @@ function ConfirmRegisterContent() {
 
 	const { mutate, isError, isSuccess, isPending } = useMutation({
 		mutationFn: (t: string) => confirmRegisterFetch(t),
+		mutationKey: ['profile'],
 		onError: () => {
 			router.push('/')
 		},
@@ -46,7 +47,7 @@ function ConfirmRegisterContent() {
 	}
 
 	return (
-		<div className='flex items-center justify-center flex-1'>
+		<div className='flex items-center justify-center flex-1 h-full'>
 			<Form
 				renderTitle={() => (
 					<h3 className='font-sans text-2xl font-semibold text-center'>

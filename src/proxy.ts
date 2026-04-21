@@ -3,9 +3,10 @@ import { getServerProfileFetch } from './entities/user/api/get-server-profile-fe
 
 export async function proxy(request: NextRequest) {
 	const token = request.cookies.get('access_token')?.value
+	const url = request.nextUrl.pathname
 
 	if (!token) {
-		if (request.nextUrl.pathname.startsWith('/profile'))
+		if (url.startsWith('/profile'))
 			return NextResponse.redirect(new URL('/', request.url))
 
 		return NextResponse.next()
@@ -14,14 +15,14 @@ export async function proxy(request: NextRequest) {
 		const res = await getServerProfileFetch(token)
 
 		if (res.isSuccess) {
-			if (request.nextUrl.pathname.startsWith('/auth'))
+			if (url.startsWith('/auth') && !url.startsWith('/auth/confirm'))
 				return NextResponse.redirect(new URL('/profile', request.url))
 		} else {
-			if (request.nextUrl.pathname.startsWith('/profile'))
+			if (url.startsWith('/profile'))
 				return NextResponse.redirect(new URL('/', request.url))
 		}
 	} catch (e) {
-		if (request.nextUrl.pathname.startsWith('auth'))
+		if (url.startsWith('auth'))
 			return NextResponse.redirect(new URL('/profile', request.url))
 	}
 }

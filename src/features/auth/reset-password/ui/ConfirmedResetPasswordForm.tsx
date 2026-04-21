@@ -68,7 +68,7 @@ function ConfirmedResetPasswordContent() {
 	}
 
 	return (
-		<div className='flex items-center justify-center flex-1'>
+		<div className='flex items-center justify-center h-full'>
 			<Form
 				renderTitle={() => (
 					<h3 className='font-sans text-2xl font-semibold text-center'>

@@ -256,7 +256,7 @@ function SidebarTrigger({
 	onClick,
 	...props
 }: React.ComponentProps<typeof Button>) {
-	const { toggleSidebar } = useSidebar()
+	const { toggleSidebar, state } = useSidebar()
 
 	return (
 		<Button
@@ -264,7 +264,7 @@ function SidebarTrigger({
 			data-slot='sidebar-trigger'
 			variant='ghost'
 			size='icon-sm'
-			className={cn(className)}
+			className={cn(className, state === 'collapsed' && 'ml-2')}
 			onClick={event => {
 				onClick?.(event)
 				toggleSidebar()

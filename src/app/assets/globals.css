@@ -162,10 +162,6 @@ body {
 	@apply font-open-sans flex flex-col;
 }
 
-body > main {
-	@apply px-3.5 flex flex-col flex-1;
-}
-
 .container {
 	@apply max-w-325 mt-0 mx-auto px-3.5;
 }

@@ -9,17 +9,34 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
-	SidebarTrigger
+	SidebarTrigger,
+	useSidebar
 } from '@/shared/ui/shadcn/sidebar'
 import { cn } from '@/shared/utils/classNames'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { sidebarMenuItems } from '../model/sidebar-menu-items'
+import {
+	sidebarMenuItemsIfAuth,
+	sidebarMenuItemsIfNoAuth
+} from '../model/sidebar-menu-items'
+import { useCallback } from 'react'
+import { useAuth } from '@/entities/user'
+import { ROUTES } from '@/shared/utils/routes'
+import UserInfo from '@/entities/user/ui/UserInfo'
 
 export default function Sidebar() {
 	const pathName = usePathname()
+	const { isAuth } = useAuth()
+	const { isMobile } = useSidebar()
 
-	if (pathName === '/' || pathName.includes('auth')) return null
+	const getSidebarItems = useCallback(
+		() => (isAuth ? sidebarMenuItemsIfAuth : sidebarMenuItemsIfNoAuth),
+		[isAuth]
+	)
+
+	if (!isMobile) {
+		if (pathName.startsWith(ROUTES.auth) || pathName === '/') return null
+	}
 
 	return (
 		<div>
@@ -29,7 +46,7 @@ export default function Sidebar() {
 					<SidebarGroup>
 						<SidebarGroup>
 							<SidebarMenu className='flex flex-col gap-2'>
-								{sidebarMenuItems.map(item => {
+								{getSidebarItems().map(item => {
 									const Icon = item.icon
 									const isActive = pathName === item.href
 
@@ -62,7 +79,11 @@ export default function Sidebar() {
 						</SidebarGroup>
 					</SidebarGroup>
 				</SidebarContent>
-				<SidebarFooter />
+				{isAuth && (
+					<SidebarFooter>
+						<UserInfo />
+					</SidebarFooter>
+				)}
 				<SidebarTrigger>123</SidebarTrigger>
 			</AppSidebar>
 		</div>

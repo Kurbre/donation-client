@@ -1,8 +1,9 @@
-import { checkAuth } from '@/entities/user'
+import { checkAuth } from '@/entities/user/server'
 import { Button } from '@/shared/ui/button'
 import Link from 'next/link'
 import { BiDonateHeart } from 'react-icons/bi'
 import { UserDropdownMenu } from './UserDropdownMenu'
+import { SidebarTrigger } from '@/shared/ui/shadcn/sidebar'
 
 export default async function Header() {
 	const isAuth = await checkAuth()
@@ -16,7 +17,7 @@ export default async function Header() {
 						Donation
 					</Link>
 				</div>
-				<div className='flex items-center gap-5'>
+				<div className='hidden items-center gap-5 md:flex'>
 					{!isAuth ? (
 						<Link href='/auth/login'>
 							<Button styledBorder>
@@ -27,6 +28,7 @@ export default async function Header() {
 						<UserDropdownMenu />
 					)}
 				</div>
+				<SidebarTrigger className='md:hidden block' />
 			</div>
 		</header>
 	)

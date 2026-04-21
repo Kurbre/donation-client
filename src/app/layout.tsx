@@ -2,8 +2,10 @@ import { Header } from '@/widgets/header'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Open_Sans, Roboto_Serif } from 'next/font/google'
 import { PropsWithChildren } from 'react'
-import '../assets/globals.css'
-import Providers from '../providers'
+import './assets/globals.css'
+import Providers from './providers'
+import { Sidebar } from '@/widgets/sidebar'
+import { SidebarProvider } from '@/shared/ui/shadcn/sidebar'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -38,8 +40,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
 		>
 			<body className='dark'>
 				<Providers>
-					<Header />
-					<main>{children}</main>
+					<Sidebar />
+					<div className='flex flex-col w-full'>
+						<Header />
+						<main className='h-full px-3.5'>{children}</main>
+					</div>
 				</Providers>
 			</body>
 		</html>

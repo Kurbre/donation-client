@@ -21,6 +21,7 @@ export default function LoginForm() {
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: (data: LoginData) => loginFetch(data),
+		mutationKey: ['profile'],
 		onSuccess: data => {
 			toast.success(`${data.name} вы успешно авторизовались`)
 			if (document.referrer && !document.referrer.includes('/auth/login')) {
@@ -84,13 +85,13 @@ export default function LoginForm() {
 					<div className='mt-6 flex justify-between items-center'>
 						<Link
 							href={ROUTES.resetPassword}
-							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
+							className='text-xs text-gray-400 transition-opacity duration-200 whitespace-nowrap hover:opacity-70'
 						>
 							Забыли пароль?
 						</Link>
 						<Link
 							href={ROUTES.register}
-							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70'
+							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70 max-w-50'
 						>
 							Ещё нет аккаунта? Зарегистрироваться
 						</Link>

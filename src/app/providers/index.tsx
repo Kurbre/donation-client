@@ -18,8 +18,10 @@ export default function Providers({ children }: PropsWithChildren) {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			{children}
-			<ToastContainer theme='dark' position='bottom-right' />
+			<SidebarProvider>
+				{children}
+				<ToastContainer theme='dark' position='bottom-right' />
+			</SidebarProvider>
 		</QueryClientProvider>
 	)
 }
