@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 export const useLogout = () => {
 	const router = useRouter()
 	const mutate = useMutation({
+		mutationKey: ['profile'],
 		mutationFn: logoutFetch,
 		onSuccess: data => {
 			toast.success(data.message)
