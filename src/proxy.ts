@@ -5,12 +5,19 @@ export async function proxy(request: NextRequest) {
 	const token = request.cookies.get('access_token')?.value
 
 	if (!token) return NextResponse.redirect(new URL('/', request.url))
+	try {
+		const res = await getServerProfileFetch(token)
 
-	const res = await getServerProfileFetch(token)
+		if (request.nextUrl.pathname.includes('profile') && !res.isSuccess)
+			return NextResponse.redirect(new URL('/', request.url))
 
-	if (!res.isSuccess) return NextResponse.redirect(new URL('/', request.url))
+		if (request.nextUrl.pathname.includes('auth') && res.isSuccess)
+			return NextResponse.redirect(new URL('/profile', request.url))
+	} catch (e) {
+		return NextResponse.redirect(new URL('/', request.url))
+	}
 }
 
 export const config = {
-	matcher: ['/profile/:path*']
+	matcher: ['/profile/:path*', '/auth/:path*']
 }
