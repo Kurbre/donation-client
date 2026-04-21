@@ -12,6 +12,7 @@ import {
 } from '@/shared/ui/shadcn/dropdown-menu'
 import { cn } from '@/shared/utils/classNames'
 import { ROUTES } from '@/shared/utils/routes'
+import { useQueryClient } from '@tanstack/react-query'
 import { LucideLayoutDashboard } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -21,6 +22,12 @@ import { IoMdArrowDropdown, IoMdExit, IoMdSettings } from 'react-icons/io'
 export function UserDropdownMenu() {
 	const [isOpenMenu, setIsOpenMenu] = useState(false)
 	const { mutate: mutateLogout, isPending: isPendingLogout } = useLogout()
+	const queryClient = useQueryClient()
+
+	const logoutClickHandler = () => {
+		mutateLogout()
+		queryClient.removeQueries({ queryKey: ['profile'] })
+	}
 
 	return (
 		<DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>
@@ -62,7 +69,7 @@ export function UserDropdownMenu() {
 				<DropdownMenuGroup>
 					<DropdownMenuItem
 						className='flex items-center gap-2 cursor-pointer'
-						onClick={() => mutateLogout()}
+						onClick={logoutClickHandler}
 						disabled={isPendingLogout}
 					>
 						<IoMdExit />
