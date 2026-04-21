@@ -4,17 +4,25 @@ import { getServerProfileFetch } from './entities/user/api/get-server-profile-fe
 export async function proxy(request: NextRequest) {
 	const token = request.cookies.get('access_token')?.value
 
-	if (!token) return NextResponse.redirect(new URL('/', request.url))
+	if (!token) {
+		if (request.nextUrl.pathname.startsWith('/profile'))
+			return NextResponse.redirect(new URL('/', request.url))
+
+		return NextResponse.next()
+	}
 	try {
 		const res = await getServerProfileFetch(token)
 
-		if (request.nextUrl.pathname.includes('profile') && !res.isSuccess)
-			return NextResponse.redirect(new URL('/', request.url))
-
-		if (request.nextUrl.pathname.includes('auth') && res.isSuccess)
-			return NextResponse.redirect(new URL('/profile', request.url))
+		if (res.isSuccess) {
+			if (request.nextUrl.pathname.startsWith('/auth'))
+				return NextResponse.redirect(new URL('/profile', request.url))
+		} else {
+			if (request.nextUrl.pathname.startsWith('/profile'))
+				return NextResponse.redirect(new URL('/', request.url))
+		}
 	} catch (e) {
-		return NextResponse.redirect(new URL('/', request.url))
+		if (request.nextUrl.pathname.startsWith('auth'))
+			return NextResponse.redirect(new URL('/profile', request.url))
 	}
 }
 
