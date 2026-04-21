@@ -27,3 +27,23 @@ jest.mock('next/navigation', () => ({
 		get: mockGet
 	})
 }))
+
+beforeAll(() => {
+	Object.defineProperty(window, 'matchMedia', {
+		writable: true,
+		configurable: true,
+		value: (query: string) => ({
+			matches: false,
+			media: query,
+			onchange: null,
+
+			addEventListener: jest.fn(),
+			removeEventListener: jest.fn(),
+
+			addListener: jest.fn(),
+			removeListener: jest.fn(),
+
+			dispatchEvent: jest.fn()
+		})
+	})
+})
