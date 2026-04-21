@@ -22,10 +22,14 @@ export default function UserInfo() {
 				alt='Avatar'
 				width={45}
 				height={45}
+				priority
 			/>
-			<span className='font-semibold'>
-				{user.name} {user.surname}
-			</span>
+			<div className='flex flex-col items-start'>
+				<span className='font-semibold text-sm'>
+					{user.name} {user.surname}
+				</span>
+				<span className='text-xs'>{user.email}</span>
+			</div>
 		</div>
 	)
 }

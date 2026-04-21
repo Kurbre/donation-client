@@ -12,6 +12,7 @@ import {
 } from '@/shared/ui/shadcn/dropdown-menu'
 import { cn } from '@/shared/utils/classNames'
 import { ROUTES } from '@/shared/utils/routes'
+import { LucideLayoutDashboard } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { FaRegUserCircle } from 'react-icons/fa'
@@ -36,15 +37,15 @@ export function UserDropdownMenu() {
 					</span>
 				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align='start'>
+			<DropdownMenuContent align='start' className='w-[calc(100%+20px)]'>
 				<DropdownMenuGroup>
 					<DropdownMenuItem>
 						<Link
 							href={ROUTES.profile}
 							className='flex items-center gap-2 cursor-pointer'
 						>
-							<FaRegUserCircle />
-							<span className='-mt-0.5'>Профиль</span>
+							<LucideLayoutDashboard />
+							<span className='-mt-0.5'>Панель управления</span>
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem>
@@ -53,7 +54,7 @@ export function UserDropdownMenu() {
 							className='flex items-center gap-2 cursor-pointer'
 						>
 							<IoMdSettings />
-							<span className='-mt-0.5'>Настройки</span>
+							<span className='-mt-0.5'>Настройки аккаунта</span>
 						</Link>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
