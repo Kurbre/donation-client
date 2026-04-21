@@ -1,5 +1,8 @@
 'use client'
 
+import { useAuth } from '@/entities/user'
+import UserInfo from '@/entities/user/ui/UserInfo'
+import { LogoutButton } from '@/features/auth/logout'
 import {
 	Sidebar as AppSidebar,
 	SidebarContent,
@@ -13,21 +16,19 @@ import {
 	useSidebar
 } from '@/shared/ui/shadcn/sidebar'
 import { cn } from '@/shared/utils/classNames'
+import { ROUTES } from '@/shared/utils/routes'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useCallback } from 'react'
 import {
 	sidebarMenuItemsIfAuth,
 	sidebarMenuItemsIfNoAuth
 } from '../model/sidebar-menu-items'
-import { useCallback } from 'react'
-import { useAuth } from '@/entities/user'
-import { ROUTES } from '@/shared/utils/routes'
-import UserInfo from '@/entities/user/ui/UserInfo'
 
 export default function Sidebar() {
 	const pathName = usePathname()
 	const { isAuth } = useAuth()
-	const { isMobile } = useSidebar()
+	const { isMobile, setOpen, setOpenMobile, state } = useSidebar()
 
 	const getSidebarItems = useCallback(
 		() => (isAuth ? sidebarMenuItemsIfAuth : sidebarMenuItemsIfNoAuth),
@@ -64,6 +65,10 @@ export default function Sidebar() {
 															isActive && 'font-semibold',
 															'group-data-[collapsible=icon]:-ml-2'
 														)}
+														onClick={() => {
+															setOpen(false)
+															setOpenMobile(false)
+														}}
 													>
 														<Icon size={18} />
 														<span className='whitespace-nowrap'>
@@ -81,7 +86,8 @@ export default function Sidebar() {
 				</SidebarContent>
 				{isAuth && (
 					<SidebarFooter>
-						<UserInfo />
+						<UserInfo isSidebar />
+						<LogoutButton />
 					</SidebarFooter>
 				)}
 				<SidebarTrigger>123</SidebarTrigger>

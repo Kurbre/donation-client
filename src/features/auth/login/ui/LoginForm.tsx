@@ -91,7 +91,7 @@ export default function LoginForm() {
 						</Link>
 						<Link
 							href={ROUTES.register}
-							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70 max-w-50'
+							className='text-xs text-gray-400 transition-opacity duration-200 hover:opacity-70 text-right'
 						>
 							Ещё нет аккаунта? Зарегистрироваться
 						</Link>
