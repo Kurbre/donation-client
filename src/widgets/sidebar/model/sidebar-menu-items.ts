@@ -10,7 +10,7 @@ export const sidebarMenuItemsIfAuth = [
 	},
 	{
 		label: 'Настройки',
-		href: ROUTES.register,
+		href: ROUTES.settings,
 		icon: LucideSettings
 	}
 ]
@@ -21,7 +21,7 @@ export const sidebarMenuItemsIfNoAuth = [
 		icon: FiLogIn
 	},
 	{
-		label: 'Настройки',
+		label: 'Регистрация',
 		href: ROUTES.register,
 		icon: LucideSettings
 	}

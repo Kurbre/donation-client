@@ -19,7 +19,6 @@ import { cn } from '@/shared/utils/classNames'
 import { ROUTES } from '@/shared/utils/routes'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useCallback } from 'react'
 import {
 	sidebarMenuItemsIfAuth,
 	sidebarMenuItemsIfNoAuth
@@ -30,10 +29,9 @@ export default function Sidebar() {
 	const { isAuth } = useAuth()
 	const { isMobile, setOpen, setOpenMobile, state } = useSidebar()
 
-	const getSidebarItems = useCallback(
-		() => (isAuth ? sidebarMenuItemsIfAuth : sidebarMenuItemsIfNoAuth),
-		[isAuth]
-	)
+	const sidebarItems = isAuth
+		? sidebarMenuItemsIfAuth
+		: sidebarMenuItemsIfNoAuth
 
 	if (!isMobile) {
 		if (pathName.startsWith(ROUTES.auth) || pathName === '/') return null
@@ -47,7 +45,7 @@ export default function Sidebar() {
 					<SidebarGroup>
 						<SidebarGroup>
 							<SidebarMenu className='flex flex-col gap-2'>
-								{getSidebarItems().map(item => {
+								{sidebarItems.map(item => {
 									const Icon = item.icon
 									const isActive = pathName === item.href
 
