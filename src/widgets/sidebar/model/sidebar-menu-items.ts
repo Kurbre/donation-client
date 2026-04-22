@@ -1,6 +1,7 @@
 import { ROUTES } from '@/shared/utils/routes'
 import { LucideLayoutDashboard, LucideSettings } from 'lucide-react'
 import { FiLogIn } from 'react-icons/fi'
+import { IoMdSettings } from 'react-icons/io'
 
 export const sidebarMenuItemsIfAuth = [
 	{
@@ -9,9 +10,9 @@ export const sidebarMenuItemsIfAuth = [
 		icon: LucideLayoutDashboard
 	},
 	{
-		label: 'Настройки',
+		label: 'Настройки аккаунта',
 		href: ROUTES.settings,
-		icon: LucideSettings
+		icon: IoMdSettings
 	}
 ]
 export const sidebarMenuItemsIfNoAuth = [
@@ -23,6 +24,6 @@ export const sidebarMenuItemsIfNoAuth = [
 	{
 		label: 'Регистрация',
 		href: ROUTES.register,
-		icon: LucideSettings
+		icon: FiLogIn
 	}
 ]

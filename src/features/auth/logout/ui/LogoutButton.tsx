@@ -20,7 +20,7 @@ export default function LogoutButton({}) {
 
 	return !isMobile && state === 'collapsed' ? (
 		<ShadcnButton
-			className='from-main to-foremain bg-linear-to-br text-white'
+			className='from-main to-foremain bg-linear-to-br text-white cursor-pointer'
 			onClick={clickHandler}
 			disabled={isPending}
 		>

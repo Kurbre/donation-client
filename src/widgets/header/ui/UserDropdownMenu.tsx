@@ -16,7 +16,6 @@ import { useQueryClient } from '@tanstack/react-query'
 import { LucideLayoutDashboard } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { FaRegUserCircle } from 'react-icons/fa'
 import { IoMdArrowDropdown, IoMdExit, IoMdSettings } from 'react-icons/io'
 
 export function UserDropdownMenu() {
@@ -57,7 +56,7 @@ export function UserDropdownMenu() {
 					</DropdownMenuItem>
 					<DropdownMenuItem>
 						<Link
-							href={ROUTES.profile}
+							href={ROUTES.settings}
 							className='flex items-center gap-2 cursor-pointer'
 						>
 							<IoMdSettings />
