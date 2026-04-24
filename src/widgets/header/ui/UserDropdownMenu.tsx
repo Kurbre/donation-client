@@ -1,6 +1,6 @@
 'use client'
 
-import UserInfo from '@/entities/user/ui/UserInfo'
+import { UserInfo } from '@/entities/user'
 import { useLogout } from '@/features/auth/logout'
 import {
 	DropdownMenu,

@@ -1,3 +1,4 @@
+import { UpdateUser } from '@/features/update-profile'
 import { Dispatch, SetStateAction } from 'react'
 
 export type User = {
@@ -9,4 +10,8 @@ export type User = {
 	avatarPath: string
 	createdAt: string
 	updatedAt: string
+}
+
+export type UpdateUserData = UpdateUser & {
+	avatarPath?: string
 }

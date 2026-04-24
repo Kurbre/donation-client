@@ -8,7 +8,9 @@ import { Button } from '@/shared/ui/button'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateUserFetch } from '@/entities/user/api/update-user-fetch'
 import { toast } from 'react-toastify'
-import { useAuth } from '@/entities/user'
+import { Avatar, UpdateUserData, useAuth } from '@/entities/user'
+import { UploadMedia } from '@/entities/media'
+import { useState } from 'react'
 
 export default function UpdateUser() {
 	const { register, formState, handleSubmit } = useForm<UpdateUser>({
@@ -18,10 +20,11 @@ export default function UpdateUser() {
 
 	const queryClient = useQueryClient()
 	const { user } = useAuth()
+	const [avatarFile, setAvatarFile] = useState('')
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['profile'],
-		mutationFn: (data: UpdateUser) => updateUserFetch(data),
+		mutationFn: (data: UpdateUserData) => updateUserFetch(data),
 		onSuccess: () => {
 			toast.success('Вы успешно обновили аккаунт')
 			queryClient.invalidateQueries({ queryKey: ['profile'] })
@@ -34,13 +37,17 @@ export default function UpdateUser() {
 	const submitHandler = (data: UpdateUser) => {
 		if (!user) return
 
-		const dto: Partial<UpdateUser> = {}
+		const dto: Partial<UpdateUserData> = {}
 
 		Object.entries(data).forEach(([key, value]) => {
 			if (value === user[key as keyof typeof user]) return
 
 			dto[key as keyof UpdateUser] = value
 		})
+
+		if (avatarFile.length > 0) {
+			dto.avatarPath = avatarFile
+		}
 
 		if (Object.keys(dto).length <= 0) {
 			toast.info('Изменения не обнаружены')
@@ -54,6 +61,15 @@ export default function UpdateUser() {
 		<form className='px-5' onSubmit={handleSubmit(submitHandler)}>
 			<h3 className='text-2xl'>Аккаунт</h3>
 			<div className='w-2/6 flex flex-col gap-3 mt-3'>
+				<div>
+					<span className='font-sans font-semibold text-sm text-gray-400'>
+						Аватар
+					</span>
+					<div className='flex gap-3 items-center mt-1'>
+						<Avatar />
+						<UploadMedia setFileSrc={setAvatarFile} />
+					</div>
+				</div>
 				<Input
 					{...register('name')}
 					placeholder='Имя'
@@ -68,7 +84,12 @@ export default function UpdateUser() {
 					error={formState.errors.surname?.message}
 					defaultValue={user?.surname}
 				/>
-				<Button className='mt-1 w-fit' type='submit' disabled={isPending}>
+				<Button
+					className='mt-1 w-fit'
+					size='medium'
+					type='submit'
+					disabled={isPending}
+				>
 					Сохранить
 				</Button>
 			</div>

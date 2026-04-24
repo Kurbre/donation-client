@@ -1,9 +1,9 @@
 'use client'
-import Image from 'next/image'
-import { useAuth } from '../lib/useAuth'
-import { Skeleton } from '@/shared/ui/shadcn/skeleton'
 import { useSidebar } from '@/shared/ui/shadcn/sidebar'
+import { Skeleton } from '@/shared/ui/shadcn/skeleton'
 import { cn } from '@/shared/utils/classNames'
+import { useAuth } from '../lib/useAuth'
+import Avatar from './Avatar'
 
 export default function UserInfo({
 	isSidebar = false
@@ -26,24 +26,12 @@ export default function UserInfo({
 	return (
 		<div
 			className={cn(
-				'flex items-center gap-1',
+				'flex items-center gap-2',
 				isSidebarCollapsed && 'flex-col'
 			)}
 		>
-			<Image
-				src={user.avatarPath}
-				className='rounded-full'
-				alt='Avatar'
-				width={45}
-				height={45}
-				priority
-			/>
-			{isSidebarCollapsed ? (
-				<span className='font-semibold text-medium leading-0 mt-1 mb-4'>
-					{user.name[0]}
-					{user.surname[0]}
-				</span>
-			) : (
+			<Avatar />
+			{!isSidebarCollapsed && (
 				<div className='flex flex-col items-start'>
 					<span className='font-semibold text-sm'>
 						{user.name} {user.surname}

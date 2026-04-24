@@ -1,9 +1,8 @@
 import { axiosMain } from '@/shared/api/axios'
 import axios from 'axios'
-import { User } from '../model/types'
-import { type UpdateUser } from '@/features/update-profile/model/types'
+import { UpdateUserData, User } from '../model/types'
 
-export const updateUserFetch = async (data: UpdateUser) => {
+export const updateUserFetch = async (data: UpdateUserData) => {
 	try {
 		const res = await axiosMain.patch<User>('/users', data)
 

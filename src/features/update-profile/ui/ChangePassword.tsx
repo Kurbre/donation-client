@@ -32,7 +32,7 @@ export default function ChangePassword() {
 					label='Повторите пароль'
 					error={formState.errors.repeatPassword?.message}
 				/>
-				<Button className='mt-1 w-fit' type='submit'>
+				<Button size='medium' className='mt-1 w-fit' type='submit'>
 					Сменить пароль
 				</Button>
 			</div>

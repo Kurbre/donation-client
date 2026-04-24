@@ -5,4 +5,5 @@ export type ButtonProps = DetailedHTMLProps<
 	HTMLButtonElement
 > & {
 	styledBorder?: boolean
+	size?: 'small' | 'medium' | 'big'
 }

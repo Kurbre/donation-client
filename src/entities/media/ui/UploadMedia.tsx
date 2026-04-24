@@ -33,7 +33,9 @@ export default function UploadMedia({
 
 	return (
 		<>
-			<Button onClick={() => ref.current?.click()}>{label}</Button>
+			<Button type='button' size='medium' onClick={() => ref.current?.click()}>
+				{label}
+			</Button>
 			<input
 				type='file'
 				ref={ref}

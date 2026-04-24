@@ -1,4 +1,4 @@
-import { checkAuth } from '@/entities/user/server'
+import { getAuth } from '@/entities/user/server'
 import { Button } from '@/shared/ui/button'
 import Link from 'next/link'
 import { BiDonateHeart } from 'react-icons/bi'
@@ -6,7 +6,7 @@ import { UserDropdownMenu } from './UserDropdownMenu'
 import { SidebarTrigger } from '@/shared/ui/shadcn/sidebar'
 
 export default async function Header() {
-	const isAuth = await checkAuth()
+	const { isAuth } = await getAuth()
 
 	return (
 		<header className='bg-foreground-bg'>

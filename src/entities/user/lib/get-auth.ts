@@ -1,7 +1,10 @@
 import { getServerProfileFetch } from '../api/get-server-profile-fetch'
 
-export const checkAuth = async () => {
+export const getAuth = async () => {
 	const user = await getServerProfileFetch()
 
-	return user.isSuccess
+	return {
+		user: user.data,
+		isAuth: !!user.data
+	}
 }

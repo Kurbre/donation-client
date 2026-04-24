@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuth } from '@/entities/user'
-import UserInfo from '@/entities/user/ui/UserInfo'
+import { UserInfo } from '@/entities/user'
 import { LogoutButton } from '@/features/auth/logout'
 import {
 	Sidebar as AppSidebar,
